@@ -4,13 +4,13 @@ import Card from "../components/atoms/Card";
 import { useState } from "react";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [invalidEmailError, setInvalidEmailError] = useState('');
   const [invalidPasswordError, setInvalidPasswordError] = useState('');
 
-  const handleEmailChange = (ev: any) => {
-    setEmail(ev.target.value);
+  const handleUsernameChange = (ev: any) => {
+    setUsername(ev.target.value);
   }
 
   const handlePasswordChange = (ev: any) => {
@@ -25,12 +25,12 @@ const Login = () => {
   const handleLogin = () => {
     resetErrorMsgs();
 
-    if (email.length == 0) {
+    if (username.length == 0) {
       setInvalidEmailError('Empty Email')
       return
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    const usernameRegex = /^[A-Za-z][A-Za-z0-9_]{1,29}$/
+    if (!usernameRegex.test(username)) {
       setInvalidEmailError('Wrong Email Format')
       return
     }
@@ -50,22 +50,22 @@ const Login = () => {
         </div>
         <div className="mx-auto">
           <label
-            htmlFor="email"
+            htmlFor="username"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Email
+            Username
           </label>
           <div className="relative mt-2 rounded-md shadow-sm">
             <input
-              type="email"
-              name="email"
-              id="email"
+              type="text"
+              name="username"
+              id="username"
               className={`${invalidEmailError ? "text-red-900 ring-red-300 placeholder:text-red-300 focus:ring-red-500" : "" } block w-full rounded-md border-0 py-1.5 pr-10 ring-1 ring-inset focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6`}
-              placeholder="you@example.com"
+              placeholder=""
               aria-invalid="true"
               aria-describedby="email-error"
-              value={email}
-              onChange={handleEmailChange}
+              value={username}
+              onChange={handleUsernameChange}
             />
             { invalidEmailError && (
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
