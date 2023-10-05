@@ -2,8 +2,12 @@ import Container from "../components/atoms/Container";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import Card from "../components/atoms/Card";
 import { useState } from "react";
+import axios from "axios";
+import AppAlert from "../utility/AppAlert";
 
 const Signup = () => {
+  const appAlert = AppAlert();
+
   const [name, setName] = useState('');
   const [phone, setPhone] = useState<number>();
   const [email, setEmail] = useState('');
@@ -78,6 +82,23 @@ const Signup = () => {
     }
 
     // API Call
+    axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/register`, {
+      name: name,
+      phone: phone,
+      email: email,
+      username: userName,
+      password: password
+    })
+    .then((response) => {
+      if (response.status == 201) {
+        appAlert?.showAlert({message: "User Created", type: "SUCCESS", duration: 5000});
+      }
+    })
+    .catch((err) => {
+      if (err.response.status == 400) {
+        appAlert?.showAlert({message: err.response.data.error, type: "ERROR", duration: 5000});
+      }
+    })
   }
 
   return (
