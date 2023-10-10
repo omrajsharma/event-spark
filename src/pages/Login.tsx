@@ -2,8 +2,12 @@ import Container from "../components/atoms/Container";
 import { ExclamationCircleIcon } from "@heroicons/react/20/solid";
 import Card from "../components/atoms/Card";
 import { useState } from "react";
+import axios from "axios";
+import AppAlert from "../utility/AppAlert";
 
 const Login = () => {
+  const appAlert = AppAlert()!;
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [invalidEmailError, setInvalidEmailError] = useState('');
@@ -40,6 +44,20 @@ const Login = () => {
     }
 
     // API Call
+    axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/login`, {
+      username: username,
+      password: password
+    })
+    .then((response) => {
+      if (response.status == 200) {
+        if (appAlert && appAlert.showAlert)
+          appAlert?.showAlert({message: "User Logged In", type: "SUCCESS", duration: 5000});
+      }
+    })
+    .catch((err) => {
+      if (appAlert && appAlert.showAlert)
+        appAlert?.showAlert({message: err.response.data.error, type: "ERROR", duration: 5000});
+    })
   }
 
   return (

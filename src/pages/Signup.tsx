@@ -91,12 +91,14 @@ const Signup = () => {
     })
     .then((response) => {
       if (response.status == 201) {
-        appAlert?.showAlert({message: "User Created", type: "SUCCESS", duration: 5000});
+        if (appAlert && appAlert.showAlert)
+          appAlert?.showAlert({message: "User Created", type: "SUCCESS", duration: 5000});
       }
     })
     .catch((err) => {
       if (err.response.status == 400) {
-        appAlert?.showAlert({message: err.response.data.error, type: "ERROR", duration: 5000});
+        if (appAlert && appAlert.showAlert)
+          appAlert?.showAlert({message: err.response.data.error, type: "ERROR", duration: 5000});
       }
     })
   }
