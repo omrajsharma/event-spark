@@ -21,6 +21,10 @@ const userNavigation = [
   { name: 'Settings', href: '#' },
   { name: 'Sign out', href: '#' },
 ]
+const userNavigationOnLogout = [
+  { name: 'Login', href: 'login' },
+  { name: 'Signup', href: 'signup' },
+]
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -182,7 +186,7 @@ export default function Header() {
               ))}
             </div>
             <div className="border-t border-gray-700 pb-3 pt-4">
-              <div className="flex items-center px-4">
+              {/* <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
                   <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
                 </div>
@@ -198,9 +202,9 @@ export default function Header() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-              </div>
+              </div> */}
               <div className="mt-3 space-y-1 px-2">
-                {userNavigation.map((item) => (
+                {/* {userNavigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
                     as="a"
@@ -209,7 +213,14 @@ export default function Header() {
                   >
                     {item.name}
                   </Disclosure.Button>
+                ))} */}
+                
+                {userNavigationOnLogout.map((item) => (
+                  <Link to={item.href} className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'>
+                    {item.name}
+                  </Link>
                 ))}
+
               </div>
             </div>
           </Disclosure.Panel>
