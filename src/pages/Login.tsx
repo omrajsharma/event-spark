@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import AppAlert from "../utility/AppAlert";
 import { UserContext } from "../context/UserContext";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
   const userContext = useContext(UserContext)
@@ -16,6 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [invalidEmailError, setInvalidEmailError] = useState('');
   const [invalidPasswordError, setInvalidPasswordError] = useState('');
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   const handleUsernameChange = (ev: any) => {
     setUsername(ev.target.value);
@@ -58,8 +60,11 @@ const Login = () => {
           appAlert?.showAlert({message: "User Logged In", type: "SUCCESS", duration: 5000});
           userContext.setUserInfo({
             userId: response.data.data.userId,
-            username: response.data.data.username
+            username: response.data.data.username,
+            name: response.data.data.name,
+            email: response.data.data.email,
           })
+          setRedirectToHome(true)
         }
       }
     })
@@ -67,6 +72,10 @@ const Login = () => {
       if (appAlert && appAlert.showAlert)
         appAlert?.showAlert({message: err.response.data.error, type: "ERROR", duration: 5000});
     })
+  }
+  
+  if (redirectToHome) {
+    return <Navigate to={'/'} />
   }
 
   return (
