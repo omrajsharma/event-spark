@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 interface UserInfo {
     userId: string,
@@ -28,6 +28,19 @@ export const UserContext = createContext<UserContextType>({
 
 export default function UserContextProvider({children}: any) {
     const [userInfo, setUserInfo] = useState({userId: "", username: "", name: "", email: ""})
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/profile`, {
+            credentials: 'include'
+        })
+          .then(res => res.json())
+          .then(data => setUserInfo({
+            userId: data.data.userId,
+            username: data.data.username,
+            name: data.data.name,
+            email: data.data.email,
+          }))
+    }, [])
 
     const resetUserContext = () => {
         setUserInfo({userId: "", username: "", name: "", email: ""})

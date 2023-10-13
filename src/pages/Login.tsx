@@ -53,6 +53,8 @@ const Login = () => {
     axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/login`, {
       username: username,
       password: password
+    }, {
+      withCredentials: true
     })
     .then((response) => {
       if (response.status == 200) {
