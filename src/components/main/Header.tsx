@@ -125,26 +125,18 @@ export default function Header() {
                   </Menu>)
                   : (
                     <div>
-                      <Link
-                        to={'/login'}
-                        className={classNames(
-                          false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'inline-flex items-center rounded-md py-2 px-3 text-sm font-medium'
-                        )}
-                        aria-current={true ? 'page' : undefined}
-                      >
-                        Login
-                      </Link>
-                      <Link
-                        to={'/signup'}
-                        className={classNames(
-                          false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'inline-flex items-center rounded-md py-2 px-3 text-sm font-medium'
-                        )}
-                        aria-current={true ? 'page' : undefined}
-                      >
-                        Sign Up
-                      </Link>
+                      {userNavigationOnLogout.map((item) => (
+                        <Link
+                          to={item.href}
+                          className={classNames(
+                            false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            'inline-flex items-center rounded-md py-2 px-3 text-sm font-medium'
+                          )}
+                          aria-current={true ? 'page' : undefined}
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
                     </div>
                   )}
               </div>
