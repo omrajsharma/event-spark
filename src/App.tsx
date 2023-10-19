@@ -5,6 +5,7 @@ import Signup from './pages/Signup'
 import EventDetail from './pages/EventDetail'
 import Profile from './pages/Profile'
 import MainLayout from './layout/MainLayout'
+import Admin from './pages/Admin'
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/signup' element={<Signup />} />
         <Route path='/event/:eventId' element={<EventDetail />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/admin' element={<Admin />} />
       </Route>
     </Routes>
   )

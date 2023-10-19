@@ -75,6 +75,11 @@ export default function Header() {
                 </Disclosure.Button>
               </div>
               <div className="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
+                {userContext.userInfo.username == 'admin' && (
+                  <Link to={'/admin'} className='text-white mr-4 border p-2 rounded-lg'>
+                    Admin Panel
+                  </Link>
+                )}
                 <button
                   type="button"
                   className="relative flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
