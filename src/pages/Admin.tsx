@@ -199,7 +199,7 @@ const AddEventForm = () => {
     )
 }
 
-const AllEvents = ({ data }: any) => {
+const AllEvents = () => {
     const [showAddEventForm, setShowAddEventForm] = useState(false);
 
     return (
@@ -209,27 +209,6 @@ const AllEvents = ({ data }: any) => {
             </button>
 
             {showAddEventForm ? <AddEventForm /> : null}
-        </div>
-    )
-}
-const ActiveEvents = ({ data }: any) => {
-    return (
-        <div>
-            Active Events
-        </div>
-    )
-}
-const CompletedEvents = ({ data }: any) => {
-    return (
-        <div>
-            Completed Events
-        </div>
-    )
-}
-const CancelledEvents = ({ data }: any) => {
-    return (
-        <div>
-            Cancelled Events
         </div>
     )
 }
@@ -292,11 +271,7 @@ const Admin = () => {
                             </button>
                     )}
                 </div>
-                {activeTabIndex == 0 ? (<AllEvents data={tabData} />)
-                    : activeTabIndex == 1 ? (<ActiveEvents data={tabData} />)
-                        : activeTabIndex == 2 ? (<CompletedEvents data={tabData} />)
-                            : activeTabIndex == 3 ? (<CancelledEvents data={tabData} />)
-                                : null}
+                {activeTabIndex == 0 ? (<AllEvents />) : null}
 
                 {tabData?.data?.length > 0
                     ? tabData?.data?.map(eventInfo => (
